@@ -14,21 +14,27 @@ function App() {
   const [items, setItems] = useState(getitemfromlocal());
 
   function handle(event) {
-    console.log(event)
+    console.log(event);
     const inputValue = event.target.value;
     setInput(inputValue);
   }
+
+  // function for addition of elements
   function add() {
-    
     setItems((prevValue) => {
-      return [...prevValue, {input,isDone:false}];
+      return [...prevValue, { input, isDone: false }];
     });
     setInput(" ");
   }
+
+  // this gonna add out items to local storage 
+  
   var stringify = JSON.stringify(items);
   console.log(stringify);
   localStorage.setItem("mytodos", stringify);
 
+
+  // function for deletion of elements
   function DeleteItem(id) {
     console.log("delete item called");
     setItems((prevValue) => {
@@ -37,13 +43,13 @@ function App() {
       });
     });
   }
-  
+
   return (
     <div className="container">
       <div className="heading">
         <h1>To-Do List</h1>
       </div>
-      <Input clicked={handle} buttonclick={add} value={input}/>
+      <Input clicked={handle} buttonclick={add} value={input} />
       <div>
         <ul>
           {items.map((todoitem, index) =>

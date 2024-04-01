@@ -1,18 +1,8 @@
 import React, { useState } from "react";
 function List(props) {
-  function decoration(){
-    var bool=JSON.parse(localStorage.getItem("lineThrough"))
-    if(bool){
-      return bool;
-    }
-    else{
-      return {bol:false,ids:null};
-    }
-  }
-  const [isDone, setStyle] = useState(decoration());
+  // For completed tasks suppose you clicked on a task added it will make it marked as line through.
   function lineThrough(id) {
-    // console.log("clicked")
-    // return setStyle((prevValue) => {return {bol:!(prevValue.bol),ids:id}});
+    
     props.set(prevvalue=>prevvalue.map((item,index)=>{
       if(index==id){
     return {...item,isDone:!item.isDone}
@@ -20,14 +10,13 @@ function List(props) {
       return item;
     }))
   }
-  localStorage.setItem("lineThrough",JSON.stringify(isDone))
+  
   return (
+    // These are lists that are mapped after added to list items array.
     <li
       style={{ textDecoration: (props.value.isDone)? "line-through" : "none" }}
       onClick={() => {
         lineThrough(props.id)
-        
-        // props.onchecked(props.id);
       }}
     >
       {props.value.input}{" "}
