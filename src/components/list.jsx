@@ -10,21 +10,27 @@ function List(props) {
     }
   }
   const [isDone, setStyle] = useState(decoration());
-  // function lineThrough(id) {
-  //   console.log("clicked")
-  //   return setStyle((prevValue) => {return {bol:!(prevValue.bol),ids:id}});
-  // }
+  function lineThrough(id) {
+    // console.log("clicked")
+    // return setStyle((prevValue) => {return {bol:!(prevValue.bol),ids:id}});
+    props.set(prevvalue=>prevvalue.map((item,index)=>{
+      if(index==id){
+    return {...item,isDone:!item.isDone}
+      }
+      return item;
+    }))
+  }
   localStorage.setItem("lineThrough",JSON.stringify(isDone))
   return (
     <li
-      // tyle={{ textDecoration: (isDone && isDone.ids==props.id)? "line-through" : "none" }}
+      style={{ textDecoration: (props.value.isDone)? "line-through" : "none" }}
       onClick={() => {
-        // lineThrough(props.id)
+        lineThrough(props.id)
         
-        props.onchecked(props.id);
+        // props.onchecked(props.id);
       }}
     >
-      {props.value}{" "}
+      {props.value.input}{" "}
       <i
         onClick={() => {
           props.onchecked(props.id);

@@ -21,7 +21,7 @@ function App() {
   function add() {
     
     setItems((prevValue) => {
-      return [...prevValue, input];
+      return [...prevValue, {input,isDone:false}];
     });
     setInput(" ");
   }
@@ -52,6 +52,7 @@ function App() {
                 key={index}
                 id={index}
                 value={todoitem}
+                set={setItems}
                 bool={false}
                 onchecked={DeleteItem}
               />
